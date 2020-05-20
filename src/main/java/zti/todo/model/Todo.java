@@ -8,9 +8,10 @@ public class Todo{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	@Column(unique = true)
 	private String title;
-
-
+	private String subtitle;
+	private String category;
 
 	public Todo() {}
 
@@ -28,5 +29,21 @@ public class Todo{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getSubtitle() {
+		return subtitle;
+	}
+
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }
