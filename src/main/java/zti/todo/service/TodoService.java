@@ -11,11 +11,11 @@ import java.util.Optional;
 public class TodoService {
 	@Autowired
 	private TodoRepositoryCrud todoRepository;
-	
+
 	public Iterable<Todo> getAllTodos(){
 		return todoRepository.findAll();
 	}
-	
+
 	public Optional<Todo> getTodoById(Integer id) {
 		return todoRepository.findById(id);
 	}
@@ -24,12 +24,12 @@ public class TodoService {
 		todoRepository.save(todo);
 		return 1;
 	}
-	
+
 	public int deleteTodo(Integer id) {
 		todoRepository.deleteById(id);
 		return 1;
 	}
-	
+
 	public void updateTodo(Integer id, Todo todo) {
 		Optional<Todo> todoFromDb = todoRepository.findById(id);
 	    if(todoFromDb.isPresent()) {

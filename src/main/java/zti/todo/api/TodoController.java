@@ -11,7 +11,7 @@ import zti.todo.service.TodoService;
 public class TodoController {
 	@Autowired
 	private TodoService todoservice;
-	
+
 	@GetMapping
 	public @ResponseBody Iterable<Todo> getTodos(){
 		return todoservice.getAllTodos();
