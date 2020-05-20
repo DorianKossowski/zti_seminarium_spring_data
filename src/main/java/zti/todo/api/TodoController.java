@@ -9,32 +9,40 @@ import zti.todo.service.TodoService;
 @RestController
 @CrossOrigin("*")
 public class TodoController {
-	@Autowired
-	private TodoService todoservice;
+    @Autowired
+    private TodoService todoservice;
 
-	@GetMapping
-	public @ResponseBody Iterable<Todo> getTodos(){
-		return todoservice.getAllTodos();
-	}
-	
-	@GetMapping(path = "{id}")
-	public @ResponseBody Todo getTodoById(@PathVariable("id") Integer id){
-		return todoservice.getTodoById(id).orElse(null);
-	}
-	
-	@PostMapping
-	public void addTodo(@RequestBody Todo newTodo) {
-		todoservice.addTodo(newTodo);
-	}
-	
-	@PutMapping(path = "{id}")
-	public void updateTodo(@PathVariable("id") Integer id, @RequestBody Todo todo) {
-		todoservice.updateTodo(id, todo);
-	}
-	
-	@DeleteMapping(path = "{id}")
-	public void delTodo(@PathVariable("id") Integer id){
-		todoservice.deleteTodo(id);
-	}
-	
+    @GetMapping
+    public @ResponseBody Iterable<Todo> getTodos(@RequestParam(required = false) Integer page,
+                                                 @RequestParam(required = false) Integer size) {
+        if(page!=null && size != null) {
+            return todoservice.getAllWithPagination(page, size);
+        }
+        return todoservice.getAllTodos();
+    }
+
+    @GetMapping(path = "/sort/{sortByName}")
+    public @ResponseBody Iterable<Todo> getSortedTodos(@PathVariable String sortByName) {
+        return todoservice.getAllSortedBy(sortByName);
+    }
+
+    @GetMapping(path = "{id}")
+    public @ResponseBody Todo getTodoById(@PathVariable("id") Integer id) {
+        return todoservice.getTodoById(id).orElse(null);
+    }
+
+    @PostMapping
+    public void addTodo(@RequestBody Todo newTodo) {
+        todoservice.addTodo(newTodo);
+    }
+
+    @PutMapping(path = "{id}")
+    public void updateTodo(@PathVariable("id") Integer id, @RequestBody Todo todo) {
+        todoservice.updateTodo(id, todo);
+    }
+
+    @DeleteMapping(path = "{id}")
+    public void delTodo(@PathVariable("id") Integer id) {
+        todoservice.deleteTodo(id);
+    }
 }
