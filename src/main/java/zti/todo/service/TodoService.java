@@ -64,4 +64,7 @@ public class TodoService {
         return todoRepository.findAllByCategory(categoryName);
     }
 
+    public List<Todo> getAllWithSameTitleSubtitle() {
+        return todoRepository.findAllWithSameTitleSubtitle();
+    }
 }

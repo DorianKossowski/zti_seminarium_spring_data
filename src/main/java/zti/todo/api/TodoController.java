@@ -39,6 +39,11 @@ public class TodoController {
         return todoservice.getAllByCategory(categoryName);
     }
 
+    @GetMapping(path = "/same")
+    public @ResponseBody List<Todo> getTodoWithSameTitleSubtitle() {
+        return todoservice.getAllWithSameTitleSubtitle();
+    }
+
     @PostMapping
     public void addTodo(@RequestBody Todo newTodo) {
         todoservice.addTodo(newTodo);
