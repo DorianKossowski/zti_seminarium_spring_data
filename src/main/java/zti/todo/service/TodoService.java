@@ -1,18 +1,20 @@
 package zti.todo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import zti.todo.model.Todo;
-import zti.todo.repository.TodoRepositoryPageSort;
+import zti.todo.repository.TodoRepositoryJpa;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TodoService {
     @Autowired
-    private TodoRepositoryPageSort todoRepository;
+    private TodoRepositoryJpa todoRepository;
 
     public Iterable<Todo> getAllTodos() {
         return todoRepository.findAll();
@@ -50,6 +52,12 @@ public class TodoService {
 
     public Iterable<Todo> getAllWithPagination(int page, int size) {
         return todoRepository.findAll(PageRequest.of(page, size));
+    }
+
+    public List<Todo> getAllByCategoryExample(String categoryName) {
+        Todo probe = new Todo();
+        probe.setCategory(categoryName);
+        return todoRepository.findAll(Example.of(probe));
     }
 
 }

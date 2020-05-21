@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import zti.todo.model.Todo;
 import zti.todo.service.TodoService;
 
+import java.util.List;
+
 @RequestMapping("api/v1/todos")
 @RestController
 @CrossOrigin("*")
@@ -29,6 +31,11 @@ public class TodoController {
     @GetMapping(path = "{id}")
     public @ResponseBody Todo getTodoById(@PathVariable("id") Integer id) {
         return todoservice.getTodoById(id).orElse(null);
+    }
+
+    @GetMapping(path = "/category/{categoryName}")
+    public @ResponseBody List<Todo> getTodoByCategory(@PathVariable("categoryName") String categoryName) {
+        return todoservice.getAllByCategoryExample(categoryName);
     }
 
     @PostMapping
