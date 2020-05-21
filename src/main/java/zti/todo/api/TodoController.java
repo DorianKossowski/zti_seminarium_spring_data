@@ -35,7 +35,8 @@ public class TodoController {
 
     @GetMapping(path = "/category/{categoryName}")
     public @ResponseBody List<Todo> getTodoByCategory(@PathVariable("categoryName") String categoryName) {
-        return todoservice.getAllByCategoryExample(categoryName);
+//        return todoservice.getAllByCategoryExample(categoryName);
+        return todoservice.getAllByCategory(categoryName);
     }
 
     @PostMapping

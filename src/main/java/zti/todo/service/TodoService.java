@@ -60,4 +60,8 @@ public class TodoService {
         return todoRepository.findAll(Example.of(probe));
     }
 
+    public List<Todo> getAllByCategory(String categoryName) {
+        return todoRepository.findAllByCategory(categoryName);
+    }
+
 }
