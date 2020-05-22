@@ -39,6 +39,11 @@ public class TodoController {
         return todoservice.getAllByCategory(categoryName);
     }
 
+    @GetMapping(path = "/categoryStats")
+    public @ResponseBody List<Object[]> getCategoryStats() {
+        return todoservice.getAllCategoryStats();
+    }
+
     @GetMapping(path = "/same")
     public @ResponseBody List<Todo> getTodoWithSameTitleSubtitle() {
         return todoservice.getAllWithSameTitleSubtitle();

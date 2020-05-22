@@ -9,6 +9,9 @@ import java.util.List;
 public interface TodoRepositoryJpa extends JpaRepository<Todo, Integer> {
     List<Todo> findAllByCategory(String categoryName);
 
-    @Query("SELECT t from Todo t where LOWER(t.title) = LOWER(t.subtitle)")
+    @Query("SELECT t FROM Todo t WHERE LOWER(t.title) = LOWER(t.subtitle)")
     List<Todo> findAllWithSameTitleSubtitle();
+
+    @Query(value = "SELECT category, COUNT(*) amount FROM todos GROUP BY category ORDER BY amount", nativeQuery = true)
+    List<Object[]> findCategoryStats();
 }
